@@ -6,17 +6,20 @@
 # @ZhFileDescription    : 
 # @EnFileDescription    : 
 """
+import time
 from utils import hisEqulColor
 import settings
 import cv2 as cv
 
 
 def detectTennis():
+    num = 0
     cap = cv.VideoCapture(settings.DEVICE)
+    print(cap.get(cv.CAP_PROP_FRAME_WIDTH),cap.get(cv.CAP_PROP_FRAME_HEIGHT),cap.get(cv.CAP_PROP_FPS))
     if not cap.isOpened():
         raise Exception("can not opened")
     ret, srcImage = cap.read()
-
+    in_time = time.time()
     cv.namedWindow("resultWindow")
     while ret:
         srcFrame = srcImage.copy()
@@ -73,15 +76,23 @@ def detectTennis():
         for cc in contoursCircles:
             if cc[3] > settings.MIN_VOTE:
                 trueCircles.append(cc)
-        print(trueCircles)
         for x, y, r, v in trueCircles:
             cv.circle(srcImage, (int(x), int(y)), int(r), (0, 0, 255), 2)
             cv.circle(srcImage, (int(x), int(y)), 1, (0, 0, 255), 1)
-        cv.imshow("resultWindow", srcImage)
-        k = cv.waitKey(1) & 0xFF
-        if k == 27:
-            break
+        #cv.imshow("resultWindow", srcImage)
+
+        #k = cv.waitKey(1) & 0xFF
+        #if k == 27:
+        #    break
         ret, srcImage = cap.read()
+        num=num+1
+        now = time.time()
+        if now-in_time > 100:
+            break
+        print(num)
+    out_time=time.time()
+    print(num//int(out_time-in_time))
+    
 
 
 if __name__ == '__main__':

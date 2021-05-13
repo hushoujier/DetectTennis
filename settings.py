@@ -14,21 +14,21 @@ from utils import createCircleKernel
 PROJECT_PATH = Path(__file__).resolve().parent
 
 # 相机设备文件
-DEVICE = "./data/3.mp4"
+DEVICE = 0
 
 # 彩色图像均衡化参数
-HIS_EQU_COLOR = True
+HIS_EQU_COLOR = False
 
 # 高斯滤波参数
-GAUSSIAN_BLUR_KSIZE = (3, 3)
+GAUSSIAN_BLUR_KSIZE = None
 GAUSSIAN_BLUR_SIGMAX = 0
 GAUSSIAN_BLUR_SIGMAY = 0
 
 # 均值滤波参数
-BLUR_KSIZE = (5, 5)
+BLUR_KSIZE = None
 
 # 中值滤波参数
-MEDIAN_BLUR_KSIZE = 5
+MEDIAN_BLUR_KSIZE = None
 
 # 色域分割参数
 HSV_LOWER = np.array([15, 50, 60])
@@ -46,7 +46,7 @@ ERODE_ITERATIONS = 1
 
 # 形态检测参数
 PI = 3.14
-AREA_RATE = 0.7
+AREA_RATE = 0.6
 METHOD = cv.HOUGH_GRADIENT
 DP = 1
 MIN_DIST = 5
