@@ -27,7 +27,8 @@ def record_video(out_file, device):
     while ret:
         cv.imshow("Video", srcImage)
         video_writer.write(srcImage)
-        cv.waitKey(1000 // fps)
+        if cv.waitKey(1000 // fps) & 0xFF == 27:
+            break
         ret, srcImage = cap.read()
 
 
