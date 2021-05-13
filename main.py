@@ -13,9 +13,9 @@ import cv2 as cv
 
 
 def detectTennis():
-    num = 0
+    num = 1
     cap = cv.VideoCapture(settings.DEVICE)
-    print(cap.get(cv.CAP_PROP_FRAME_WIDTH),cap.get(cv.CAP_PROP_FRAME_HEIGHT),cap.get(cv.CAP_PROP_FPS))
+    print(cap.get(cv.CAP_PROP_FRAME_WIDTH), cap.get(cv.CAP_PROP_FRAME_HEIGHT), cap.get(cv.CAP_PROP_FPS))
     if not cap.isOpened():
         raise Exception("can not opened")
     ret, srcImage = cap.read()
@@ -52,7 +52,8 @@ def detectTennis():
             (x, y), radius = cv.minEnclosingCircle(c)
             area = settings.PI * radius * radius
             if cv.contourArea(c) > area * settings.AREA_RATE:
-                contoursCircles.append([x, y, radius, 0])
+                contoursCircles.append([x, y, radius, 1])
+        print("contoursCircles:{}个,分别为{}".format(len(contoursCircles), contoursCircles))
         houghCircles = cv.HoughCircles(erodeFrame,
                                        method=settings.METHOD,
                                        dp=settings.DP,
@@ -65,7 +66,7 @@ def detectTennis():
             houghCircles = houghCircles[0, :]
         else:
             houghCircles = []
-
+        print("houghCircles:{}个".format(len(houghCircles)))
         for hc in houghCircles:
             for cc in contoursCircles:
                 if abs(cc[0] - hc[0]) < settings.MAX_ABS_X \
@@ -76,23 +77,23 @@ def detectTennis():
         for cc in contoursCircles:
             if cc[3] > settings.MIN_VOTE:
                 trueCircles.append(cc)
+        print("trueCircles", trueCircles)
         for x, y, r, v in trueCircles:
             cv.circle(srcImage, (int(x), int(y)), int(r), (0, 0, 255), 2)
             cv.circle(srcImage, (int(x), int(y)), 1, (0, 0, 255), 1)
-        #cv.imshow("resultWindow", srcImage)
+        cv.imshow("resultWindow", srcImage)
 
-        #k = cv.waitKey(1) & 0xFF
-        #if k == 27:
-        #    break
+        k = cv.waitKey(1) & 0xFF
+        if k == 27:
+            break
         ret, srcImage = cap.read()
-        num=num+1
+        num = num + 1
         now = time.time()
-        if now-in_time > 100:
+        if now - in_time > 100:
             break
         print(num)
-    out_time=time.time()
-    print(num//int(out_time-in_time))
-    
+    out_time = time.time()
+    print(num // int(out_time - in_time))
 
 
 if __name__ == '__main__':

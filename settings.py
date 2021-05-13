@@ -14,21 +14,21 @@ from utils import createCircleKernel
 PROJECT_PATH = Path(__file__).resolve().parent
 
 # 相机设备文件
-DEVICE = 0
+DEVICE = "./test_record_video.mp4"
 
 # 彩色图像均衡化参数
 HIS_EQU_COLOR = False
 
 # 高斯滤波参数
-GAUSSIAN_BLUR_KSIZE = None
+GAUSSIAN_BLUR_KSIZE = (5, 5)
 GAUSSIAN_BLUR_SIGMAX = 0
 GAUSSIAN_BLUR_SIGMAY = 0
 
 # 均值滤波参数
-BLUR_KSIZE = None
+BLUR_KSIZE = (5, 5)
 
 # 中值滤波参数
-MEDIAN_BLUR_KSIZE = None
+MEDIAN_BLUR_KSIZE = 5
 
 # 色域分割参数
 HSV_LOWER = np.array([15, 50, 60])
@@ -46,18 +46,18 @@ ERODE_ITERATIONS = 1
 
 # 形态检测参数
 PI = 3.14
-AREA_RATE = 0.6
+AREA_RATE = 0.8
 METHOD = cv.HOUGH_GRADIENT
 DP = 1
-MIN_DIST = 5
+MIN_DIST = 10
 PARAM1 = 200
-PARAM2 = 0.5
-MIN_RADIUS = 10
-MAX_RADIUS = 80
-MAX_ABS_X = 20
-MAX_ABS_Y = 20
-MAX_ABS_R = 20
-MIN_VOTE = 25
+PARAM2 = 0.9
+MIN_RADIUS = 20
+MAX_RADIUS = 50
+MAX_ABS_X = 30
+MAX_ABS_Y = 30
+MAX_ABS_R = 30
+MIN_VOTE = 10
 
 if __name__ == '__main__':
     print("unit test from {filename}".format(filename=__file__))
