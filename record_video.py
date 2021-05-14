@@ -18,7 +18,6 @@ def record_video(out_file, device):
     height = int(cap.get(cv.CAP_PROP_FRAME_HEIGHT))
     width = int(cap.get(cv.CAP_PROP_FRAME_WIDTH))
     fourcc = cv.VideoWriter_fourcc(*'mp4v')
-
     fps = int(cap.get(cv.CAP_PROP_FPS))
     print(height, width, fourcc, fps)
     video_writer = cv.VideoWriter(out_file, fourcc, fps, (width, height))
