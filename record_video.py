@@ -34,4 +34,4 @@ def record_video(out_file, device):
 
 if __name__ == '__main__':
     print("unit test from {filename}".format(filename=__file__))
-    record_video("test_record_video.mp4", "./data/1.mp4")
+    record_video("test_record_video2.mp4", 0)
