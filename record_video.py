@@ -14,6 +14,7 @@ import settings
 def record_video(out_file, device):
     cv.namedWindow("Video")
     cap = cv.VideoCapture(device)
+    
     height = int(cap.get(cv.CAP_PROP_FRAME_HEIGHT))
     width = int(cap.get(cv.CAP_PROP_FRAME_WIDTH))
     fourcc = cv.VideoWriter_fourcc(*'mp4v')
