@@ -13,8 +13,15 @@ from utils import createCircleKernel
 
 PROJECT_PATH = Path(__file__).resolve().parent
 
+# 是否为测试模式
+DEBUG = True
+
 # 相机设备文件
-DEVICE = "./test_record_video2.mp4"
+DEVICE = "./4.mp4"
+
+# 串口设备文件和波特率
+SERIAL_DEVICE = "/dev/serial0"
+RATE = 115200
 
 # 彩色图像均衡化参数
 HIS_EQU_COLOR = False
